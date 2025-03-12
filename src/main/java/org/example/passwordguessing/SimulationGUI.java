@@ -29,7 +29,7 @@ public class SimulationGUI  extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Моделювання відкриття сейфу");
 
-        // Створення елементів керування
+        // Creating UI objects
         Label attemptsLabel = new Label("Кількість спроб:");
         attemptsField = new TextField(String.valueOf(DEFAULT_ATTEMPTS));
         attemptsField.setPrefWidth(100);
@@ -49,15 +49,15 @@ public class SimulationGUI  extends Application {
         logArea.setEditable(false);
         logArea.setPrefHeight(150);
 
-        // Створення діаграми
+        // building diagram
         resultChart = new PieChart();
         resultChart.setTitle("Результати моделювання");
         resultChart.setLabelsVisible(true);
 
-        // Налаштування обробника подій для кнопки
+        // setting action for button
         //startButton.setOnAction();
 
-        // Створення макету
+        // layout
         GridPane inputGrid = new GridPane();
         inputGrid.setAlignment(Pos.CENTER);
         inputGrid.setHgap(10);
@@ -65,9 +65,17 @@ public class SimulationGUI  extends Application {
         inputGrid.addRow(0, attemptsLabel, attemptsField);
         inputGrid.addRow(1, simulationsLabel, simulationsField);
 
+        //full width button
+        startButton.setPadding(new Insets(8));
+        inputGrid.addRow(2,startButton);
+        GridPane.setColumnSpan(startButton,2);
+        GridPane.setHgrow(startButton, Priority.ALWAYS);
+        startButton.setMaxWidth(Double.MAX_VALUE);
+
+
         VBox controlBox = new VBox(10);
         controlBox.setPadding(new Insets(10));
-        controlBox.getChildren().addAll(inputGrid, startButton, progressBar, statusLabel, resultLabel);
+        controlBox.getChildren().addAll(inputGrid, progressBar, statusLabel, resultLabel);
 
         BorderPane resultPane = new BorderPane();
         resultPane.setCenter(resultChart);
